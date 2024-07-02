@@ -4,6 +4,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import Container from "@/components/layout/Container";
 import NavBar from "@/components/layout/NavBar";
+import SocketProvider from "@/providers/SocketProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,18 +20,20 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={inter.className}>
-          <main className='flex flex-col min-h-screen bg-secondary'>
-            <NavBar />
-            <section className='flex-grow'>
-              <Container>
-                {children}
-              </Container>
-            </section>
-          </main>
-        </body>
-      </html>
+      <SocketProvider>
+        <html lang="en">
+          <body className={inter.className}>
+            <main className='flex flex-col min-h-screen bg-secondary'>
+              <NavBar />
+              <section className='flex-grow'>
+                <Container>
+                  {children}
+                </Container>
+              </section>
+            </main>
+          </body>
+        </html>
+      </SocketProvider>
     </ClerkProvider>
   );
 }
